@@ -1,21 +1,28 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 
+const files = [
+  { name: "wall_street_report.txt", size: 200, type: "text/plain" },
+  { name: "todo.jpeg", size: 150, type: "image/jpeg" },
+  { name: "wu_tang.mp3", size: 1500, type: "audio/mpeg" },
+];
+
 const typeDefs = `#graphql
 
-type Book {
-  title: String
-  author: String
+type File {  
+  name: String!
+  size: Int!
+  type: String!
 }
 
 type Query {
-  books: [Book]
+  files: [File]!
 }
 `;
 
 const resolvers = {
   Query: {
-    books: () => books,
+    files: () => files,
   },
 };
 
